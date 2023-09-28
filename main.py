@@ -16,9 +16,7 @@ cc = counter.PallasCounter(start_value=int(os.getenv('START_VALUE')))
 
 @dp.message(Command('manul'))
 async def handle_manul(msg: Message):
-    global cc
-
-    if msg.chat.id != chat_id:
+    if msg.chat.id != chat_id or msg.from_user.is_bot:
         return
 
     if cc.try_increment(msg.from_user.id):
